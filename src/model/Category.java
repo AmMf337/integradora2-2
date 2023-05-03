@@ -1,0 +1,14 @@
+package model;
+
+public enum Category {
+    BOOKS,
+    ELETRONICS,
+    CLOTHESANDACCESORIES,
+    FOODANDDRINKS,
+    STATIONERS,
+    SPORTS,
+    BEAUTYANDPERSONALCARE,
+
+    TOYSANDGAMES;
+
+}
