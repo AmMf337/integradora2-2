@@ -1,4 +1,5 @@
 package model;
+
 public class Product {
     private String name;
     private String description;
@@ -7,7 +8,8 @@ public class Product {
     private Category category;
     private int quantityOfSales;
 
-    public Product(String name, String description, double price, int availableQuantity, int category, int quantityOfSales) {
+    public Product(String name, String description, double price, int availableQuantity, int category,
+            int quantityOfSales) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -17,7 +19,7 @@ public class Product {
     }
 
     public void setCategory(int category) {
-        switch (category){
+        switch (category) {
             case 1:
                 this.category = Category.BOOKS;
                 return;

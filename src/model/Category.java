@@ -8,7 +8,6 @@ public enum Category {
     STATIONERS,
     SPORTS,
     BEAUTYANDPERSONALCARE,
-
     TOYSANDGAMES;
 
 }

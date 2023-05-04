@@ -1,18 +1,21 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
     private String buyerName;
-    private String[] productList;
+    private ArrayList<String> productList;
+    private ArrayList<Integer> quantityList;
     private double totalPrice;
     private Date dateOfPurchase;
 
-    public Order(String buyerName, String[] productList, double totalPrice, Date dateOfPurchase) {
+    public Order(String buyerName, ArrayList<String> productList, ArrayList<Integer> quantityList, double totalPrice) {
         this.buyerName = buyerName;
         this.productList = productList;
+        this.quantityList = quantityList;
         this.totalPrice = totalPrice;
-        this.dateOfPurchase = dateOfPurchase;
+        this.dateOfPurchase = null;
     }
 
     public String getBuyerName() {
@@ -23,12 +26,20 @@ public class Order {
         this.buyerName = buyerName;
     }
 
-    public String[] getProductList() {
+    public ArrayList<String> getProductList() {
         return productList;
     }
 
-    public void setProductList(String[] productList) {
+    public void setProductList(ArrayList<String> productList) {
         this.productList = productList;
+    }
+
+    public ArrayList<Integer> getQuantityList() {
+        return quantityList;
+    }
+
+    public void setQuantityList(ArrayList<Integer> quantityList) {
+        this.quantityList = quantityList;
     }
 
     public double getTotalPrice() {

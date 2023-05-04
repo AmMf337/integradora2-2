@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0245af35-9761-4c34-b9aa-2c02b8663b81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/TablaDeRequerimientos_casosDePrueba.docx.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +39,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_directory_selection": "C:/Users/Andres Mauricio Mesa/Desktop/integradora2/src/model",
-    "last_opened_file_path": "C:/Users/Andres Mauricio Mesa/Desktop/integradora2",
+    "last_opened_file_path": "C:/Users/Samuel/Desktop/integradora2-2",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -57,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683062045603</updated>
       <workItem from="1683062046784" duration="4777000" />
+      <workItem from="1683167688700" duration="120000" />
     </task>
     <servers />
   </component>
