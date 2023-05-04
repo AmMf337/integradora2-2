@@ -34,7 +34,7 @@ public class Main {
         int option = 0;
         System.out.println("welcome to mercado libre \n" +
                 "1. add product\n" +
-                "2. \n" +
+                "2. increase product\n" +
                 "3. \n" +
                 "4. \n" +
                 "5. \n" +
@@ -58,7 +58,7 @@ public class Main {
                 break;
 
             case 2:
-                System.out.println(msj);
+                case2(name, quantity);
                 break;
 
             case 3:
@@ -119,6 +119,14 @@ public class Main {
                     controller.addProduct(name, description, price, quantity, category, quantityOfSales));
         }
 
+    }
+
+    public void case2(String name, int quantity) {
+        System.out.println("type the name of the product");
+        name = reader.next();
+        System.out.println("write the quantity to increase");
+        quantity = reader.nextInt();
+        System.out.println(controller.increaseProductQuantity(name, quantity));
     }
 
     public Scanner getReader() {

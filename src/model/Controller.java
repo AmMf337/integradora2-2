@@ -19,6 +19,20 @@ public class Controller {
         return msj;
     }
 
+    public String increaseProductQuantity(String name, int quantity) {
+        String msj = "";
+        int position = searchProductPosition(name);
+        int newQuantity = 0;
+        if (position == -1) {
+            msj = "the product hasnt been found";
+        } else {
+            newQuantity = products.get(position).getAvailableQuantity() + quantity;
+            products.get(position).setAvailableQuantity(newQuantity);
+            msj = "the product quantity have been change";
+        }
+        return msj;
+    }
+
     // search methods
     public int searchProductPosition(String name) {
         int position = -1;
