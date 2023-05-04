@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -35,7 +36,7 @@ public class Main {
         System.out.println("welcome to mercado libre \n" +
                 "1. add product\n" +
                 "2. increase product\n" +
-                "3. \n" +
+                "3. add order\n" +
                 "4. \n" +
                 "5. \n" +
                 "0. Exit. ");
@@ -45,24 +46,19 @@ public class Main {
 
     public void executeOption(int option) {
         String msj = "";
-        // product atributes
-        String name = "";
-        String description = "";
-        double price = 0;
-        int quantity = 0;
-        int category = 0;
-        int quantityOfSales = 0;
+        ArrayList<String> nameProducts = new ArrayList<>();
+        ArrayList<Integer> quantityProducts = new ArrayList<>();
         switch (option) {
             case 1:
-                case1(name, description, price, quantity, category, quantityOfSales);
+                case1("", "", 0, 0, 0, 0);
                 break;
 
             case 2:
-                case2(name, quantity);
+                case2("", 0);
                 break;
 
             case 3:
-                System.out.println(msj);
+                case3("", nameProducts, quantityProducts, 0, false);
                 break;
             case 4:
 
@@ -127,6 +123,115 @@ public class Main {
         System.out.println("write the quantity to increase");
         quantity = reader.nextInt();
         System.out.println(controller.increaseProductQuantity(name, quantity));
+    }
+
+    public void case3(String nameBuyer, ArrayList<String> nameProducts, ArrayList<Integer> quantityProducts,
+            double totalprice, boolean thereIsProduct) {
+        int option = 0;
+        int quantityAvalible = 0;
+        int quantityOrder = 0;
+        String name = "";
+        System.out.println("type the name of the client");
+        nameBuyer = reader.next();
+        do {
+            System.out.println("type the names of the product");
+            name = reader.next();
+            if (controller.searchProductPosition(name) != -1) {
+                quantityAvalible = controller.searchProductQuantity(name);
+                if (quantityAvalible > 0) {
+                    System.out.println("the avalible quantity of the product is " + quantityAvalible);
+                    System.out.println("type the products quantity order");
+                    quantityOrder = reader.nextInt();
+                    if (quantityAvalible - quantityOrder >= 0) {
+                        controller.setNewQuantityProduct(name, quantityOrder);
+                        totalprice += controller.calculateTotalPriceByProduct(name, quantityOrder);
+                        nameProducts.add(name);
+                        quantityProducts.add(quantityOrder);
+                        thereIsProduct = true;
+                        do {
+                            System.out.println("want to add another product \n" +
+                                    "1. yes\n" +
+                                    "2. no");
+                            option = reader.nextInt();
+                            if (option == 2) {
+                                controller.addOrder(nameBuyer, nameProducts, quantityProducts, totalprice);
+                                System.out.println("order complete");
+                            } else if (option != 1 && option != 2) {
+                                System.out.println("invalid option");
+                            } else {
+
+                            }
+                        } while (option != 1 && option != 2);
+                    } else {
+                        do {
+                            System.out.println("there is not enough quantity of this product for this order\n" +
+                                    "want to make a correction\n" +
+                                    "1. yes\n" +
+                                    "2. no");
+                            option = reader.nextInt();
+                            if (option == 2) {
+                                if (thereIsProduct == true) {
+                                    controller.addOrder(name, nameProducts, quantityProducts, totalprice);
+                                    System.out.println("order complete");
+                                } else {
+                                    System.out.println("there arent product order denied");
+                                }
+                            } else if (option != 1) {
+                                System.out.println("invalid option");
+                            } else {
+
+                            }
+                        } while (option != 1 && option != 2);
+
+                    }
+
+                } else {
+                    do {
+                        System.out.println("this product is out of stock\n" +
+                                "want to make a correction\n" +
+                                "1. yes\n" +
+                                "2. no");
+                        option = reader.nextInt();
+                        if (option == 2) {
+                            if (thereIsProduct == true) {
+                                controller.addOrder(name, nameProducts, quantityProducts, totalprice);
+                                System.out.println("order complete");
+                            } else {
+                                System.out.println("there arent product order denied");
+                            }
+                        } else if (option != 1) {
+                            System.out.println("invalid option");
+                        } else {
+
+                        }
+                    } while (option != 1 && option != 2);
+
+                }
+
+            } else {
+                do {
+                    System.out.println("this product doesnt exist\n" +
+                            "want to make a correction\n" +
+                            "1. yes\n" +
+                            "2. no");
+                    option = reader.nextInt();
+                    if (option == 2) {
+                        if (thereIsProduct == true) {
+                            controller.addOrder(name, nameProducts, quantityProducts, totalprice);
+                            System.out.println("order complete");
+                        } else {
+                            System.out.println("there arent product order denied");
+                        }
+                    } else if (option != 1) {
+                        System.out.println("invalid option");
+                    } else {
+
+                    }
+                } while (option != 1 && option != 2);
+            }
+
+        } while (option != 2);
+
     }
 
     public Scanner getReader() {

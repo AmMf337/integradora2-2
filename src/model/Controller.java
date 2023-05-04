@@ -33,6 +33,29 @@ public class Controller {
         return msj;
     }
 
+    public String addOrder(String buyerName, ArrayList<String> productList, ArrayList<Integer> quantityList,
+            double totalPrice) {
+        String msj = "";
+        Order newOrder = new Order(buyerName, productList, quantityList, totalPrice);
+        orders.add(newOrder);
+        return msj;
+
+    }
+
+    public void setNewQuantityProduct(String name, int quantityOrder) {
+        int position = searchProductPosition(name);
+        int quantityAvalible = searchProductQuantity(name);
+        int result = quantityAvalible - quantityOrder;
+        products.get(position).setAvailableQuantity(result);
+        products.get(position).setQuantityOfSales(quantityOrder);
+    }
+
+    public double calculateTotalPriceByProduct(String name, int quantity) {
+        int position = searchProductPosition(name);
+        double totalPrice = products.get(position).getPrice() * quantity;
+        return totalPrice;
+    }
+
     // search methods
     public int searchProductPosition(String name) {
         int position = -1;
@@ -42,5 +65,10 @@ public class Controller {
             }
         }
         return position;
+    }
+
+    public int searchProductQuantity(String name) {
+        int position = searchProductPosition(name);
+        return products.get(position).getAvailableQuantity();
     }
 }
