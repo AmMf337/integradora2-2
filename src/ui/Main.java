@@ -330,7 +330,10 @@ public class Main {
                 System.out.println("The typed value must be an integer");
                 return;
             }
-            msj = controller.searchProduct(option, "", controller.getCategory(category), 0, 0);
+            if (category < 1 && category > 8) {
+                System.out.println("invalid option");
+            }
+            msj = controller.searchProductByCategory(controller.getCategory(category));
             System.out.println(msj);
         } else if (option == 3) {
             System.out.println("Type the price of the product");
