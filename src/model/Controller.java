@@ -109,6 +109,36 @@ public class Controller {
         }
        return msj;
     }
+    public String searchProductByName(String goal){
+        ArrayList<Product> productsClone = new ArrayList<>(products);
+        return searchProductByName(goal,productsClone,"");
+    }
+    public String searchProductByName(String goal,ArrayList<Product> products2,String msj){
+        products2.sort(new ComparatorName());
+        int left = 0;
+        int right = products2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(goal.compareTo(products2.get(mid).getName())<0){
+                right = mid - 1;
+            }
+            else if(goal.compareTo(products2.get(mid).getName())>0){
+                left = mid + 1;
+            } else {
+                msj += products2.get(mid).toString()+"\n";
+                
+                products2.remove(mid);
+                return searchProductByName(goal,products2,msj);
+            }
+        }
+        if(msj.equals("")){
+            msj = "product not found"; 
+        }
+       return msj;
+    }
     public String searchProduct(int option,String productName,Category category,double price,int numberOfSales){
         String msj = "";
         switch (option){

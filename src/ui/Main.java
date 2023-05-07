@@ -310,7 +310,7 @@ public class Main {
         if (option == 1) {
             System.out.println("Type the name of the product");
             String productName = reader.next();
-            msj = controller.searchProduct(1, productName, null, 0, 0);
+            msj = controller.searchProductByName(productName);
             System.out.println(msj);
         } else if (option == 2) {
             System.out.println(
@@ -341,8 +341,7 @@ public class Main {
                 System.out.println("The typed value must be an number");
                 return;
             }
-            msj = controller.searchProduct(option, "", null, priceProduct, 0);
-            System.out.println(msj);
+            msj = controller.searchByProductPrice(priceProduct);
         } else if (option == 4) {
             System.out.println("Type the number of sales");
             int numberOfsales = 0;
