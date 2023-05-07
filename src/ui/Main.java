@@ -354,7 +354,7 @@ public class Main {
                 System.out.println("The typed value must be an integer");
                 return;
             }
-            msj = controller.searchProduct(option, "", null, 0, numberOfsales);
+            msj = controller.searchProductByNumberOfSales(numberOfsales);
             System.out.println(msj);
         } else if (option == 5) {
 

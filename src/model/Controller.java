@@ -172,24 +172,36 @@ public class Controller {
         }
        return msj;
     }
-    public String searchProduct(int option,String productName,Category category,double price,int numberOfSales){
-        String msj = "";
-        switch (option){
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-                    msj = searchByProductPrice(price);
-                break;
-            case 4:
-
-                break;
-        }
-        return msj;
+    public String searchProductByNumberOfSales(int goal){
+        ArrayList<Product> productsClone = new ArrayList<>(products);
+        return searchProductByNumberOfSales((Integer)goal,productsClone,"");
     }
+    public String searchProductByNumberOfSales(Integer goal,ArrayList<Product> products2,String msj){
+        products2.sort(new ComparatorNumberOfSales());
+        int left = 0;
+        int right = products2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(goal.compareTo(products2.get(mid).getQuantityOfSales())<0){
+                right = mid - 1;
+            }
+            else if(goal.compareTo(products2.get(mid).getQuantityOfSales())>0){
+                left = mid + 1;
+            } else {
+                msj += products2.get(mid).toString()+"\n";
+                products2.remove(mid);
+                return searchProductByNumberOfSales(goal,products2,msj);
+            }
+        }
+        if(msj.equals("")){
+            msj = "product not found"; 
+        }
+       return msj;
+    }
+   
     public Category getCategory(int category){
         switch (category) {
             case 1:
