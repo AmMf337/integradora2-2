@@ -14,9 +14,16 @@ public class Controller {
 
     public String addProduct(String name, String description, double price, int availableQuantity, int category,
             int quantityOfSales) {
-        String msj = "product added";
-        Product newProduct = new Product(name, description, price, availableQuantity, category, quantityOfSales);
-        products.add(newProduct);
+        String msj = "";
+        int position = searchProductPosition(name);
+        if(position == -1){
+            Product newProduct = new Product(name, description, price, availableQuantity, category, quantityOfSales);
+            products.add(newProduct);
+            msj = "product added";
+        }else{
+            msj = "Product name already exists";
+        }
+
         return msj;
     }
 
@@ -25,7 +32,7 @@ public class Controller {
         int position = searchProductPosition(name);
         int newQuantity = 0;
         if (position == -1) {
-            msj = "the product hasnt been found";
+            msj = "the product hasn't been found";
         } else {
             newQuantity = products.get(position).getAvailableQuantity() + quantity;
             products.get(position).setAvailableQuantity(newQuantity);

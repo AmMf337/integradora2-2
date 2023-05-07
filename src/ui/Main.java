@@ -183,72 +183,94 @@ public class Main {
     }
 
     public void case3(String nameBuyer, ArrayList<String> nameProducts, ArrayList<Integer> quantityProducts,
-            double totalprice, boolean thereIsProduct) {
+                      double totalprice, boolean thereIsProduct) {
         int option = 0;
         int quantityAvalible = 0;
         int quantityOrder = 0;
         String name = "";
-        System.out.println("type the name of the client");
+        System.out.println("Type the name of the client");
         nameBuyer = reader.next();
         do {
-            System.out.println("type the names of the product");
+            System.out.println("Type the names of the product");
             name = reader.next();
             if (controller.searchProductPosition(name) != -1) {
                 quantityAvalible = controller.searchProductQuantity(name);
                 if (quantityAvalible > 0) {
-                    System.out.println("the avalible quantity of the product is " + quantityAvalible);
-                    System.out.println("type the products quantity order");
-                    quantityOrder = reader.nextInt();
-                    if (quantityAvalible - quantityOrder >= 0) {
-                        controller.setNewQuantityProduct(name, quantityOrder);
-                        totalprice += controller.calculateTotalPriceByProduct(name, quantityOrder);
-                        nameProducts.add(name);
-                        quantityProducts.add(quantityOrder);
-                        thereIsProduct = true;
-                        do {
-                            System.out.println("want to add another product \n" +
-                                    "1. yes\n" +
-                                    "2. no");
-                            option = reader.nextInt();
-                            if (option == 2) {
-                                controller.addOrder(nameBuyer, nameProducts, quantityProducts, totalprice);
-                                System.out.println("order complete");
-                            } else if (option != 1 && option != 2) {
-                                System.out.println("invalid option");
-                            } else {
-
-                            }
-                        } while (option != 1 && option != 2);
-                    } else {
-                        do {
-                            System.out.println("there is not enough quantity of this product for this order\n" +
-                                    "want to make a correction\n" +
-                                    "1. yes\n" +
-                                    "2. no");
-                            option = reader.nextInt();
+                    System.out.println("The available quantity of the product is " + quantityAvalible);
+                    System.out.println("Type the products quantity order");
+                    try {
+                        quantityOrder = Integer.parseInt(reader.next());
+                        if (quantityAvalible - quantityOrder >= 0) {
+                            controller.setNewQuantityProduct(name, quantityOrder);
+                            totalprice += controller.calculateTotalPriceByProduct(name, quantityOrder);
+                            nameProducts.add(name);
+                            quantityProducts.add(quantityOrder);
+                            thereIsProduct = true;
+                            do {
+                                System.out.println("Want to add another product?\n" +
+                                        "1. Yes\n" +
+                                        "2. No");
+                                option = Integer.parseInt(reader.next());
+                                if (option == 2) {
+                                    controller.addOrder(nameBuyer, nameProducts, quantityProducts, totalprice);
+                                    System.out.println("Order complete");
+                                } else if (option != 1 && option != 2) {
+                                    System.out.println("Invalid option");
+                                }
+                            } while (option != 1 && option != 2);
+                        } else {
+                            do {
+                                System.out.println("There is not enough quantity of this product for this order.\n" +
+                                        "Want to make a correction?\n" +
+                                        "1. Yes\n" +
+                                        "2. No");
+                                option = Integer.parseInt(reader.next());
+                                if (option == 2) {
+                                    if (thereIsProduct == true) {
+                                        controller.addOrder(name, nameProducts, quantityProducts, totalprice);
+                                        System.out.println("Order complete");
+                                    } else {
+                                        System.out.println("There are no products. Order denied.");
+                                    }
+                                } else if (option != 1) {
+                                    System.out.println("Invalid option");
+                                }
+                            } while (option != 1 && option != 2);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input format. Please enter a valid number.");
+                    }
+                } else {
+                    do {
+                        System.out.println("This product is out of stock.\n" +
+                                "Want to make a correction?\n" +
+                                "1. Yes\n" +
+                                "2. No");
+                        try {
+                            option = Integer.parseInt(reader.next());
                             if (option == 2) {
                                 if (thereIsProduct == true) {
                                     controller.addOrder(name, nameProducts, quantityProducts, totalprice);
-                                    System.out.println("order complete");
+                                    System.out.println("Order complete");
                                 } else {
-                                    System.out.println("there arent product order denied");
+                                    System.out.println("There are no products. Order denied.");
                                 }
                             } else if (option != 1) {
-                                System.out.println("invalid option");
-                            } else {
-
+                                System.out.println("Invalid option");
                             }
-                        } while (option != 1 && option != 2);
-
-                    }
-
-                } else {
-                    do {
-                        System.out.println("this product is out of stock\n" +
-                                "want to make a correction\n" +
-                                "1. yes\n" +
-                                "2. no");
-                        option = reader.nextInt();
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input format. Please enter a valid number.");
+                        }
+                    } while (option != 1 && option != 2);
+                }
+            } else {
+                do {
+                    System.out.println("This product does not exist.\n" +
+                            "Want to make a correction?\n" +
+                            "1. Yes\n" +
+                            "2. No");
+                    try {
+                        option = Integer.parseInt(reader.next());
                         if (option == 2) {
                             if (thereIsProduct == true) {
                                 controller.addOrder(name, nameProducts, quantityProducts, totalprice);
@@ -258,37 +280,13 @@ public class Main {
                             }
                         } else if (option != 1) {
                             System.out.println("invalid option");
-                        } else {
-
                         }
-                    } while (option != 1 && option != 2);
-
-                }
-
-            } else {
-                do {
-                    System.out.println("this product doesnt exist\n" +
-                            "want to make a correction\n" +
-                            "1. yes\n" +
-                            "2. no");
-                    option = reader.nextInt();
-                    if (option == 2) {
-                        if (thereIsProduct == true) {
-                            controller.addOrder(name, nameProducts, quantityProducts, totalprice);
-                            System.out.println("order complete");
-                        } else {
-                            System.out.println("there arent product order denied");
-                        }
-                    } else if (option != 1) {
-                        System.out.println("invalid option");
-                    } else {
-
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input format. Please enter a valid number.");
                     }
                 } while (option != 1 && option != 2);
             }
-
         } while (option != 2);
-
     }
 
     public void case4() {
