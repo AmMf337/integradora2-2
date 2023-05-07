@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0245af35-9761-4c34-b9aa-2c02b8663b81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/testCases/ControllerTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/integradora2-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/integradora2-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testCases/ControllerTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testCases/ControllerTestCases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,32 +36,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_directory_selection": "C:/Users/Andres Mauricio Mesa/Desktop/integradora2/src/model",
-    "last_opened_file_path": "C:/Users/Samuel/Desktop/integradora2-2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Andres Mauricio Mesa/Desktop/integradora2/src/model&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Samuel/Desktop/integradora2-2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.ControllerTestCases.testIncreaseQuantityProductNotExist">
-    <configuration name="ControllerTestCases.testAddProductDuplicateName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+}</component>
+  <component name="RunManager" selected="JUnit.ControllerTestCases">
+    <configuration name="ControllerTestCases" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -73,13 +71,28 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testAddProductDuplicateName" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTestCases.testSearchProductByCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="integradora2-2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="testCases" />
+      <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
+      <option name="METHOD_NAME" value="testSearchProductByCategory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTestCases.testAddProductWithValidInputs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTestCases.testSearchProductByCategoryNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -89,13 +102,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testAddProductWithValidInputs" />
+      <option name="METHOD_NAME" value="testSearchProductByCategoryNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTestCases.testIncreaseQuantityProductExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTestCases.testSearchProductByNameNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -105,13 +118,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testIncreaseQuantityProductExist" />
+      <option name="METHOD_NAME" value="testSearchProductByNameNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTestCases.testIncreaseQuantityProductNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTestCases.testSearchProductByPriceNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -121,7 +134,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testIncreaseQuantityProductNotExist" />
+      <option name="METHOD_NAME" value="testSearchProductByPriceNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -129,10 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTestCases.testIncreaseQuantityProductNotExist" />
-        <item itemvalue="JUnit.ControllerTestCases.testIncreaseQuantityProductExist" />
-        <item itemvalue="JUnit.ControllerTestCases.testAddProductDuplicateName" />
-        <item itemvalue="JUnit.ControllerTestCases.testAddProductWithValidInputs" />
+        <item itemvalue="JUnit.ControllerTestCases" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByCategoryNotExist" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByCategory" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByNameNotExist" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByPriceNotExist" />
       </list>
     </recent_temporary>
   </component>
@@ -148,6 +162,7 @@
       <workItem from="1683167688700" duration="120000" />
       <workItem from="1683418666802" duration="11670000" />
       <workItem from="1683472231591" duration="3502000" />
+      <workItem from="1683499563012" duration="2305000" />
     </task>
     <servers />
   </component>
