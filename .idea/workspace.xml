@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0245af35-9761-4c34-b9aa-2c02b8663b81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testCases/ControllerTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testCases/ControllerTestCases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTestCases.testSearchProductByNameNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTestCases.testSearchProductByNumberOfSales" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -118,13 +116,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testSearchProductByNameNotExist" />
+      <option name="METHOD_NAME" value="testSearchProductByNumberOfSales" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTestCases.testSearchProductByPriceNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTestCases.testSearchProductByNumberOfSalesNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="integradora2-2" />
       <extension name="coverage">
         <pattern>
@@ -134,7 +132,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="testCases" />
       <option name="MAIN_CLASS_NAME" value="testCases.ControllerTestCases" />
-      <option name="METHOD_NAME" value="testSearchProductByPriceNotExist" />
+      <option name="METHOD_NAME" value="testSearchProductByNumberOfSalesNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,10 +141,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTestCases" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByNumberOfSales" />
+        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByNumberOfSalesNotExist" />
         <item itemvalue="JUnit.ControllerTestCases.testSearchProductByCategoryNotExist" />
         <item itemvalue="JUnit.ControllerTestCases.testSearchProductByCategory" />
-        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByNameNotExist" />
-        <item itemvalue="JUnit.ControllerTestCases.testSearchProductByPriceNotExist" />
       </list>
     </recent_temporary>
   </component>
@@ -162,7 +160,7 @@
       <workItem from="1683167688700" duration="120000" />
       <workItem from="1683418666802" duration="11670000" />
       <workItem from="1683472231591" duration="3502000" />
-      <workItem from="1683499563012" duration="2305000" />
+      <workItem from="1683499563012" duration="2777000" />
     </task>
     <servers />
   </component>

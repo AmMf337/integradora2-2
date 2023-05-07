@@ -158,6 +158,28 @@ public class ControllerTestCases {
         Assertions.assertEquals("product not found", result);
     }
 
+    @Test
+    public void testSearchProductByNumberOfSales() {
+        Controller controller = new Controller();
+        controller.addProduct("Product 1", "This is product 1", 300.0, 5, 1, 0);
+        int quantity = 0;
+        String result = controller.searchProductByNumberOfSales(quantity);
+        Assertions.assertEquals("Name: "+"Product 1"+"\n"+
+                "Category: "+"BOOKS"+"\n"+
+                "Available Quantities: "+5+"\n"+
+                "Price: "+300.0+"\n"+
+                "Description: "+"This is product 1"+"\n"+
+                "Qunatities of sales: "+0+"\n"+"\n", result);
+    }
+
+    @Test
+    public void testSearchProductByNumberOfSalesNotExist() {
+        Controller controller = new Controller();
+        int quantity = 0;
+        String result = controller.searchProductByNumberOfSales(quantity);
+        Assertions.assertEquals("product not found", result);
+    }
+
 
 
 
