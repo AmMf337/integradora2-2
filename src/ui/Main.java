@@ -81,48 +81,104 @@ public class Main {
 
     public void case1(String name, String description, double price, int quantity, int category,
             int quantityOfSales) {
-        System.out.println("type the name of the product");
-        name = reader.next();
-        int position = controller.searchProductPosition(name);
-        if (position > -1) {
-            System.out.println("the product is already created. \n" +
-                    "if you want to increase the quantity of that product select 'increase quantity product'");
-        } else {
-            System.out.println("type the description of that product");
+        String input = "";
+        // Input validation
+        boolean validInput = false;
+        do {
+            System.out.println("Enter the name of the product");
+            name = reader.next();
+            if (name.isEmpty()) {
+                System.out.println("Name cannot be empty");
+            } else {
+                validInput = true;
+            }
+        } while (!validInput);
+
+        validInput = false;
+        do {
+            System.out.println("Enter the description of the product");
             description = reader.next();
+            if (description.isEmpty()) {
+                System.out.println("Description cannot be empty");
+            } else {
+                validInput = true;
+            }
+        } while (!validInput);
 
-            System.out.println("type the price of the product");
-            price = reader.nextInt();
+        validInput = false;
+        do {
+            System.out.println("Enter the price of the product");
+            input = reader.next();
+            try {
+                price = Double.parseDouble(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid price");
+            }
+        } while (!validInput);
 
-            System.out.println("type the initial quantity of products");
-            quantity = reader.nextInt();
-            do {
-                System.out.println("select the category of the product \n" +
-                        "1. BOOKS\n" +
-                        "2. ELETRONICS\n" +
-                        "3. CLOTHESANDACCESORIES\n" +
-                        "4. FOODANDDRINKS\n" +
-                        "5. STATIONERS\n" +
-                        "6. SPORTS\n" +
-                        "7. BEAUTYANDPERSONALCARE\n" +
-                        "8. TOYSANDGAMES\n");
-                category = reader.nextInt();
-                if (category < 1 || category > 8) {
-                    System.out.println("invalid option");
-                }
+        validInput = false;
+        do {
+            System.out.println("Enter the initial quantity of the product");
+            input = reader.next();
+            try {
+                quantity = Integer.parseInt(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid quantity");
+            }
+        } while (!validInput);
 
-            } while (category < 1 || category > 8);
-            System.out.println(
-                    controller.addProduct(name, description, price, quantity, category, quantityOfSales));
-        }
+        validInput = false;
+        do {
+            System.out.println("select the category of the product \n" +
+                    "1. BOOKS\n" +
+                    "2. ELETRONICS\n" +
+                    "3. CLOTHESANDACCESORIES\n" +
+                    "4. FOODANDDRINKS\n" +
+                    "5. STATIONERS\n" +
+                    "6. SPORTS\n" +
+                    "7. BEAUTYANDPERSONALCARE\n" +
+                    "8. TOYSANDGAMES\n");
+            input = reader.next();
+            try {
+                category = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("invalid option");
+            }
+            if (category < 1 && category > 8) {
+                System.out.println("invalid option");
+            } else {
+                validInput = true;
+            }
+        } while (!validInput);
 
+        // Add product to controller
+        System.out.println(controller.addProduct(name, description, price, quantity, category, quantityOfSales));
     }
 
     public void case2(String name, int quantity) {
-        System.out.println("type the name of the product");
+        String input = "";
+        boolean validInput = false;
+        System.out.println("Enter the name of the product:");
         name = reader.next();
-        System.out.println("write the quantity to increase");
-        quantity = reader.nextInt();
+        do {
+            System.out.println("Enter the quantity to increase:");
+            input = reader.next();
+            try {
+                quantity = Integer.parseInt(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("invalid option");
+            }
+        } while (!validInput);
+
+        // Input validation
+        if (quantity < 1) {
+            System.out.println("Quantity must be greater than 0.");
+            return;
+        }
+
         System.out.println(controller.increaseProductQuantity(name, quantity));
     }
 
@@ -234,76 +290,77 @@ public class Main {
         } while (option != 2);
 
     }
-    public void case4(){
+
+    public void case4() {
         int option = 0;
         String msj = "";
         System.out.println(
-                "How do you want to search the product?\n"+
-                "1.Search by name\n"+
-                "2.Search by category\n"+
-                "3.Search by price\n"+
-                "4.Search by number of sales\n"+
-                "5.Search by range of price\n"+
-                "6.Search by range of number of sales\n"+
-                "7.Search by alphabetic range\n");
-        try{
+                "How do you want to search the product?\n" +
+                        "1.Search by name\n" +
+                        "2.Search by category\n" +
+                        "3.Search by price\n" +
+                        "4.Search by number of sales\n" +
+                        "5.Search by range of price\n" +
+                        "6.Search by range of number of sales\n" +
+                        "7.Search by alphabetic range\n");
+        try {
             option = reader.nextInt();
-        }catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("The typed value must be an integer");
             return;
         }
-        if(option==1){
+        if (option == 1) {
             System.out.println("Type the name of the product");
             String productName = reader.next();
-            msj = controller.searchProduct(1,productName,null,0,0);
+            msj = controller.searchProduct(1, productName, null, 0, 0);
             System.out.println(msj);
-        } else if (option==2) {
+        } else if (option == 2) {
             System.out.println(
-                    "Choose a category for search the product:\n"+
-                    "1.Books\n"+
-                    "2.Electronics\n"+
-                    "3.Cloth and accessories\n"+
-                    "4.Food and drinks\n"+
-                    "5.Stationers\n"+
-                    "6.Sports\n"+
-                    "7.Beauty and personal care\n"+
-                    "8.Toy and games\n");
+                    "Choose a category for search the product:\n" +
+                            "1.Books\n" +
+                            "2.Electronics\n" +
+                            "3.Cloth and accessories\n" +
+                            "4.Food and drinks\n" +
+                            "5.Stationers\n" +
+                            "6.Sports\n" +
+                            "7.Beauty and personal care\n" +
+                            "8.Toy and games\n");
             int category = 0;
-            try{
+            try {
                 category = reader.nextInt();
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("The typed value must be an integer");
                 return;
             }
-            msj = controller.searchProduct(option,"",controller.getCategory(category),0,0);
+            msj = controller.searchProduct(option, "", controller.getCategory(category), 0, 0);
             System.out.println(msj);
-        } else if (option==3) {
+        } else if (option == 3) {
             System.out.println("Type the price of the product");
             double priceProduct = 0;
-            try{
+            try {
                 priceProduct = reader.nextDouble();
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("The typed value must be an number");
                 return;
             }
-            msj = controller.searchProduct(option,"",null,priceProduct,0);
+            msj = controller.searchProduct(option, "", null, priceProduct, 0);
             System.out.println(msj);
-        } else if (option==4) {
+        } else if (option == 4) {
             System.out.println("Type the number of sales");
             int numberOfsales = 0;
-            try{
-                numberOfsales  = reader.nextInt();
-            }catch (InputMismatchException e){
+            try {
+                numberOfsales = reader.nextInt();
+            } catch (InputMismatchException e) {
                 System.out.println("The typed value must be an integer");
                 return;
             }
-            msj = controller.searchProduct(option,"",null,0,numberOfsales);
+            msj = controller.searchProduct(option, "", null, 0, numberOfsales);
             System.out.println(msj);
-        } else if (option==5) {
+        } else if (option == 5) {
 
-        } else if (option==6) {
+        } else if (option == 6) {
 
-        }else if (option==7) {
+        } else if (option == 7) {
 
         }
     }
