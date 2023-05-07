@@ -3,6 +3,7 @@ package ui;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -37,7 +38,7 @@ public class Main {
                 "1. add product\n" +
                 "2. increase product\n" +
                 "3. add order\n" +
-                "4. \n" +
+                "4. search product\n" +
                 "5. \n" +
                 "0. Exit. ");
         option = validateIntegerInput();
@@ -61,7 +62,7 @@ public class Main {
                 case3("", nameProducts, quantityProducts, 0, false);
                 break;
             case 4:
-
+                case4();
                 System.out.println("");
                 break;
             case 5:
@@ -232,6 +233,79 @@ public class Main {
 
         } while (option != 2);
 
+    }
+    public void case4(){
+        int option = 0;
+        String msj = "";
+        System.out.println(
+                "How do you want to search the product?\n"+
+                "1.Search by name\n"+
+                "2.Search by category\n"+
+                "3.Search by price\n"+
+                "4.Search by number of sales\n"+
+                "5.Search by range of price\n"+
+                "6.Search by range of number of sales\n"+
+                "7.Search by alphabetic range\n");
+        try{
+            option = reader.nextInt();
+        }catch (InputMismatchException e){
+            System.out.println("The typed value must be an integer");
+            return;
+        }
+        if(option==1){
+            System.out.println("Type the name of the product");
+            String productName = reader.next();
+            msj = controller.searchProduct(1,productName,null,0,0);
+            System.out.println(msj);
+        } else if (option==2) {
+            System.out.println(
+                    "Choose a category for search the product:\n"+
+                    "1.Books\n"+
+                    "2.Electronics\n"+
+                    "3.Cloth and accessories\n"+
+                    "4.Food and drinks\n"+
+                    "5.Stationers\n"+
+                    "6.Sports\n"+
+                    "7.Beauty and personal care\n"+
+                    "8.Toy and games\n");
+            int category = 0;
+            try{
+                category = reader.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            msj = controller.searchProduct(option,"",controller.getCategory(category),0,0);
+            System.out.println(msj);
+        } else if (option==3) {
+            System.out.println("Type the price of the product");
+            double priceProduct = 0;
+            try{
+                priceProduct = reader.nextDouble();
+            }catch (InputMismatchException e){
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            msj = controller.searchProduct(option,"",null,priceProduct,0);
+            System.out.println(msj);
+        } else if (option==4) {
+            System.out.println("Type the number of sales");
+            int numberOfsales = 0;
+            try{
+                numberOfsales  = reader.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            msj = controller.searchProduct(option,"",null,0,numberOfsales);
+            System.out.println(msj);
+        } else if (option==5) {
+
+        } else if (option==6) {
+
+        }else if (option==7) {
+
+        }
     }
 
     public Scanner getReader() {

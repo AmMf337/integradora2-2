@@ -1,5 +1,5 @@
 package model;
-
+import java.util.Comparator;
 public class Product {
     private String name;
     private String description;
@@ -9,7 +9,7 @@ public class Product {
     private int quantityOfSales;
 
     public Product(String name, String description, double price, int availableQuantity, int category,
-            int quantityOfSales) {
+                   int quantityOfSales) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -92,5 +92,15 @@ public class Product {
 
     public void setQuantityOfSales(int quantityOfSales) {
         this.quantityOfSales = quantityOfSales;
+    }
+
+    @Override
+    public String toString(){
+        return  "Name: "+this.name+"\n"+
+                "Category: "+this.category.toString()+"\n"+
+                "Available Quantities: "+this.AvailableQuantity+"\n"+
+                "Price: "+this.price+"\n"+
+                "Description: "+this.description+"\n"+
+                "Qunatities of sales: "+this.quantityOfSales+"\n";
     }
 }

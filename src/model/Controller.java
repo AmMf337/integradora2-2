@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Controller {
     private ArrayList<Product> products;
@@ -70,5 +71,69 @@ public class Controller {
     public int searchProductQuantity(String name) {
         int position = searchProductPosition(name);
         return products.get(position).getAvailableQuantity();
+    }
+    public String searchByProductPrice(double goal){
+        String msj = "Product not found";
+        String msj2 ="";
+        products.sort(new ComparatorPrice());
+        int left = 0;
+        int right = products.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(goal < products.get(mid).getPrice()){
+                right = mid - 1;
+            }
+            else if(goal > products.get(mid).getPrice()){
+                left = mid + 1;
+            } else {
+                return products.get(mid).toString();
+            }
+        }
+        if(msj2!=""){
+            msj = msj2;
+        }
+        return msj;
+    }
+    public String searchProduct(int option,String productName,Category category,double price,int numberOfSales){
+        String msj = "";
+        switch (option){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+                    msj = searchByProductPrice(price);
+                break;
+            case 4:
+
+                break;
+        }
+        return msj;
+    }
+    public Category getCategory(int category){
+        switch (category) {
+            case 1:
+                return Category.BOOKS;
+            case 2:
+                return Category.ELETRONICS;
+            case 3:
+                return Category.CLOTHESANDACCESORIES;
+            case 4:
+                return Category.FOODANDDRINKS;
+            case 5:
+                return Category.STATIONERS;
+            case 6:
+                return Category.SPORTS;
+            case 7:
+                return Category.TOYSANDGAMES;
+            case 8:
+                return Category.BEAUTYANDPERSONALCARE;
+        }
+        return Category.BOOKS;
     }
 }
