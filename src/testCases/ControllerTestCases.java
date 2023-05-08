@@ -180,6 +180,64 @@ public class ControllerTestCases {
         Assertions.assertEquals("product not found", result);
     }
 
+    @Test
+    public void testSearchPriceRange(){
+        Controller controller = new Controller();
+        controller.addProduct("Product 1", "This is product 1", 300.0, 5, 1, 0);
+        controller.addProduct("Product 2", "This is product 2", 150.0, 9, 4, 8);
+        double minGoal = 100;
+        double maxGoal = 400;
+        ArrayList<Product> result = controller.searchPriceRange(minGoal, maxGoal);
+        String resultFinal =  controller.ascendantOrder(result, 1);
+
+        Assertions.assertEquals("Name: "+"Product 2"+"\n"+
+                "Category: "+"FOODANDDRINKS"+"\n"+
+                "Available Quantities: "+9+"\n"+
+                "Price: "+150.0+"\n"+
+                "Description: "+"This is product 2"+"\n"+
+                "Qunatities of sales: "+8+"\n"+"Name: "+"Product 1"+"\n"+
+                "Category: "+"BOOKS"+"\n"+
+                "Available Quantities: "+5+"\n"+
+                "Price: "+300.0+"\n"+
+                "Description: "+"This is product 1"+"\n"+
+                "Qunatities of sales: "+0+
+                "\n"
+                , resultFinal);
+        resultFinal = controller.descendantOrder(result, 1);
+        Assertions.assertEquals("Name: "+"Product 1"+"\n"+
+                        "Category: "+"BOOKS"+"\n"+
+                        "Available Quantities: "+5+"\n"+
+                        "Price: "+300.0+"\n"+
+                        "Description: "+"This is product 1"+"\n"+
+                        "Qunatities of sales: "+0+"\n"+"Name: "+"Product 2"+"\n"+
+                        "Category: "+"FOODANDDRINKS"+"\n"+
+                        "Available Quantities: "+9+"\n"+
+                        "Price: "+150.0+"\n"+
+                        "Description: "+"This is product 2"+"\n"+
+                        "Qunatities of sales: "+8+"\n"
+                , resultFinal);
+    }
+
+    @Test
+    public void testSearchNumberOfSalesRange(){
+        Controller controller = new Controller();
+        controller.addProduct("Product 1", "This is product 1", 300.0, 5, 1, 1);
+        controller.addProduct("Product 2", "This is product 2", 150.0, 9, 4, 8);
+        int minGoal = 0;
+        int maxGoal = 8;
+        ArrayList<Product> result = controller.searchNumberOfSalesRange(minGoal, maxGoal);
+        String resultFinal =  controller.ascendantOrder(result, 1);
+
+        Assertions.assertEquals("Name: "+"Product 2"+"\n"+
+                        "Category: "+"FOODANDDRINKS"+"\n"+
+                        "Available Quantities: "+9+"\n"+
+                        "Price: "+150.0+"\n"+
+                        "Description: "+"This is product 2"+"\n"+
+                        "Qunatities of sales: "+8+"\n"
+                        , resultFinal);
+
+    }
+
 
 
 
