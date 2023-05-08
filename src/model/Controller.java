@@ -197,7 +197,154 @@ public class Controller {
         }
        return msj;
     }
-   
+    public ArrayList<Product> searchPriceRange(double minGoal,double maxGoal){
+        ArrayList<Product> productsClone = new ArrayList<>(products);
+        ArrayList<Product> result = new ArrayList<>();
+        return searchPriceRange(minGoal,maxGoal,productsClone,result);
+    }
+    public ArrayList<Product> searchPriceRange(double minGoal,double maxGoal,ArrayList<Product> products2,ArrayList<Product> result){
+        products2.sort(new ComparatorPrice());
+        int left = 0;
+        int right = products2.size() - 1;
+        
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(minGoal>products2.get(mid).getPrice()){
+                right = mid - 1;
+            }
+            else if(maxGoal<products2.get(mid).getPrice()){
+                left = mid + 1;
+            } else if(minGoal<=products2.get(mid).getPrice() && products2.get(mid).getPrice()<=maxGoal){
+                result.add(products2.get(mid));
+                products2.remove(mid);
+                return searchPriceRange(minGoal, maxGoal, products2,result);
+            }
+        }
+        
+       return result;
+    }
+    public  ArrayList<Product> searchNumberOfSalesRange(int minGoal,int maxGoal){
+        ArrayList<Product> productsClone = new ArrayList<>(products);
+        ArrayList<Product> result = new ArrayList<>();
+        return searchNumberOfSalesRange(minGoal,maxGoal,productsClone,result);
+    }
+    public  ArrayList<Product> searchNumberOfSalesRange(int minGoal,int maxGoal,ArrayList<Product> products2,ArrayList<Product> result){
+        products2.sort(new ComparatorPrice());
+        int left = 0;
+        int right = products2.size() - 1;
+        
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(minGoal>products2.get(mid).getQuantityOfSales()){
+                right = mid - 1;
+            }
+            else if(maxGoal<products2.get(mid).getQuantityOfSales()){
+                left = mid + 1;
+            } else if(minGoal<=products2.get(mid).getQuantityOfSales() && products2.get(mid).getQuantityOfSales()<=maxGoal){
+                result.add(products2.get(mid));
+                products2.remove(mid);
+                return searchPriceRange(minGoal, maxGoal, products2,result);
+            }
+        }
+        
+       return result;
+    }
+    public  ArrayList<Product> searchAlphabeticRange(String minGoal,String maxGoal){
+        ArrayList<Product> productsClone = new ArrayList<>(products);
+        ArrayList<Product> result = new ArrayList<>();
+        return searchAlphabeticRange(minGoal,maxGoal,productsClone,result);
+    }
+    public  ArrayList<Product> searchAlphabeticRange(String minGoal,String maxGoal,ArrayList<Product> products2,ArrayList<Product> result){
+        products2.sort(new ComparatorPrice());
+        int left = 0;
+        int right = products2.size() - 1;
+        
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(minGoal.compareTo(products2.get(mid).getName())>0){
+                right = mid - 1;
+            }
+            else if(maxGoal.compareTo(products2.get(mid).getName())<0){
+                left = mid + 1;
+            } else if(minGoal.compareTo(products2.get(mid).getName())<=0 && maxGoal.compareTo(products2.get(mid).getName())>=0){
+                result.add(products2.get(mid));
+                products2.remove(mid);
+                return searchAlphabeticRange(minGoal, maxGoal, products2,result);
+            }
+        }
+        
+       return result;
+    }
+    public String ascendantOrder(ArrayList<Product> result,int option){
+        String msj = ""; 
+        switch(option){
+            case 1:
+                result.sort(new ComparatorName());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 2:
+                result.sort(new ComparatorCategory());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 3:
+                result.sort(new ComparatorPrice());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 4:
+                result.sort(new ComparatorNumberOfSales());
+                    for(int i = 0;i<result.size();i++){
+                        msj += result.get(i).toString();
+                    }
+                    return msj;
+            
+            default:
+                    return "Invalid option";
+        }
+    }
+    public String descendantOrder(ArrayList<Product> result,int option){
+        String msj = ""; 
+        switch(option){
+            case 1:
+                result.sort(new ComparatorName());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 2:
+                result.sort(new ComparatorCategory());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 3:
+                result.sort(new ComparatorPrice());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString();
+                }
+                return msj;
+            case 4:
+                result.sort(new ComparatorNumberOfSales());
+                    for(int i = result.size()-1;i>=0;i--){
+                        msj += result.get(i).toString();
+                    }
+                    return msj;
+            
+            default:
+                    return "Invalid option";
+            }
+        }
     public Category getCategory(int category){
         switch (category) {
             case 1:

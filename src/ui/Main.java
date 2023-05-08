@@ -292,6 +292,10 @@ public class Main {
     public void case4() {
         int option = 0;
         String msj = "";
+        double minGoal = 0;
+        double maxGoal = 0;
+        int option3 = 0;
+        int option2 = 0;
         System.out.println(
                 "How do you want to search the product?\n" +
                         "1.Search by name\n" +
@@ -357,11 +361,166 @@ public class Main {
             msj = controller.searchProductByNumberOfSales(numberOfsales);
             System.out.println(msj);
         } else if (option == 5) {
+            System.out.println("Type the minimun price");
+            try {
+                minGoal = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            System.out.println("Type the maximun price");
+            try {
+                maxGoal = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            ArrayList<Product> result = controller.searchPriceRange(minGoal, maxGoal);
+            System.out.println("Choose the element for the order of the list\n"+
+                                "1.By Name\n"+
+                                "2.By Category\n"+
+                                "3.By Price\n"+
+                                "4.By NUmber of sales\n");
+            
+            try {
+                option2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            if(option2 < 1 || option2>4){
+                System.out.println("invalid option");
+                return;
+            }
+            System.out.println("In wich order you want to see th list?\n"+
+                                "1.ascendant\n"+
+                                "2.descendant\n");
+
+            
+            try {
+                option3 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            if(option3 < 1 || option3>2){
+                System.out.println("invalid option");
+                return;
+            }
+            if(option3==1){
+                msj = controller.ascendantOrder(result, option2);
+            }else if(option3==2){
+                msj = controller.descendantOrder(result, option2);
+            }
+            System.out.println(msj);
 
         } else if (option == 6) {
-
+            int minGoal2 = 0;
+            int maxGoal2 = 0;
+            System.out.println("Type the minimun number of sales");
+            try {
+                minGoal2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            System.out.println("Type the maximun number of sales");
+            try {
+                maxGoal2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            ArrayList<Product> result = controller.searchNumberOfSalesRange(minGoal2,maxGoal2);
+            System.out.println("Choose the element for the order of the list\n"+
+                                "1.By Name\n"+
+                                "2.By Category\n"+
+                                "3.By Price\n"+
+                                "4.By NUmber of sales\n");
+            try {
+                option2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+            return;
+            }
+            if(option2 < 1 || option2>4){
+                System.out.println("invalid option");
+            return;
+            }
+            System.out.println("In wich order you want to see th list?\n"+
+                        "1.ascendant\n"+
+                        "2.descendant\n");
+            try {
+            option3 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+            return;
+            }
+            if(option3 < 1 || option3>2){
+                System.out.println("invalid option");
+                return;
+            }
+            if(option3==1){
+                msj = controller.ascendantOrder(result, option2);
+            }else if(option3==2){
+                msj = controller.descendantOrder(result, option2);
+            }
+            System.out.println(msj);
         } else if (option == 7) {
-
+            String minGoal3 = "";
+            String maxGoal3 = "";
+            int option4 = 0;
+            System.out.println("Type the letter that is the minimun limit");
+            try {
+                minGoal3 = reader.next();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            System.out.println("Type the letter that is the maximun limit");
+            try {
+                maxGoal3 = reader.next();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an number");
+                return;
+            }
+            ArrayList<Product> result = controller.searchAlphabeticRange(minGoal3,maxGoal3);
+            System.out.println("Choose the element for the order of the list\n"+
+            "1.By Name\n"+
+            "2.By Category\n"+
+            "3.By Price\n"+
+            "4.By NUmber of sales\n");
+            try {
+                option2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            if(option2 < 1 || option2>4){
+                System.out.println("invalid option");
+                return;
+            }
+            System.out.println("In wich order you want to see th list?\n"+
+                        "1.ascendant\n"+
+                        "2.descendant\n");
+            try {
+                option4 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            
+            if(option4 < 1 || option4>2){
+                System.out.println("invalid option");
+                return;
+            }
+            if(option4==1){
+                msj = controller.ascendantOrder(result, option2);
+            }else if(option4==2){
+                msj = controller.descendantOrder(result, option2);
+            }
+            System.out.println(msj);
+        
         }
     }
 
