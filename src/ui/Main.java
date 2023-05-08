@@ -1,11 +1,20 @@
 package ui;
 
+import com.google.gson.Gson;
 import model.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 public class Main {
     private Scanner reader;
     private Controller controller;
@@ -34,18 +43,21 @@ public class Main {
 
     public int getOptionShowMenu() {
         int option = 0;
+        recoverDataProduts();
+        recoverDataOrders();
         System.out.println("welcome to mercado libre \n" +
                 "1. add product\n" +
                 "2. increase product\n" +
                 "3. add order\n" +
                 "4. search product\n" +
-                "5. \n" +
+                "5. Search orders\n" +
                 "0. Exit. ");
         option = validateIntegerInput();
         return option;
     }
 
     public void executeOption(int option) {
+       
         String msj = "";
         ArrayList<String> nameProducts = new ArrayList<>();
         ArrayList<Integer> quantityProducts = new ArrayList<>();
@@ -63,13 +75,15 @@ public class Main {
                 break;
             case 4:
                 case4();
-                System.out.println("");
+                
                 break;
             case 5:
-
-                System.out.println(msj);
+                case5();
+               
                 break;
             case 0:
+                createGson();
+                createGsonOrders();
                 System.out.println("Exit program.");
                 break;
 
@@ -77,6 +91,7 @@ public class Main {
                 System.out.println("Invalid Option");
                 break;
         }
+        
     }
 
     public void case1(String name, String description, double price, int quantity, int category,
@@ -522,7 +537,260 @@ public class Main {
             System.out.println(msj);
         }
     }
+    public void case5(){
+        System.out.println("How do you want search the order?\n"+
+                            "1.By buyer name\n"+
+                            "2.By total price\n"+
+                            "3.By date\n"+
+                            "4.By alphabetic range of buyer name\n"+
+                            "5.By range of total price");
+        int option = 0;
+        String buyerName = "";
+        String msj = "";
+        double totalPrice;
+        int option2 = 0;
+        double minGoal3;
+        double maxGoal3;
+        try {
+            option = reader.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("The typed value must be an integer");
+            return;
+        }
+        if(option<1 || option>6){
+            System.out.println("invalid option");
+            return;
+        }
+        if(option == 1){
+            System.out.println("Type the name of the buyer");
+            buyerName = reader.next();
+            msj = controller.searchOrderByBuyerName(buyerName);
+            System.out.println(msj);
+        }else if(option == 2){
+            System.out.println("type the total price of the order");
+            try {
+                totalPrice = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            msj = controller.searchOrderByTotalPrice(totalPrice);
+            System.out.println(msj);
+        }else if(option == 3){
+            System.out.println("type the date of the order in the following format: 31-Dec-1998 23:37:50");
+            reader.nextLine();
+            String date = reader.nextLine();
+            try {
+                msj = controller.searchOrderByDate(date);
+            } catch (ParseException e) {
+                msj = "wrong format";
+            }
+            System.out.println(msj);
+        }else if(option == 4){
+            String minGoal1 = "";
+            String maxGoal1 = "";
+            System.out.println("Type the letter that is the minimun limit");
+            minGoal1 = reader.next();
+            System.out.println("Type the letter that is the maximun limit");
+            maxGoal1 = reader.next();
+            ArrayList<Order> result = controller.searchBuyerNameRange(minGoal1,maxGoal1);
+            System.out.println("Choose the element for the order of the list\n"+
+            "1.By buyer Name\n"+
+            "2.By Total price\n"+
+            "3.By date\n");
+            try {
+                option2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            if(option2 < 1 || option2>3){
+                System.out.println("invalid option");
+                return;
+            }
+            System.out.println("In wich order you want to see th list?\n"+
+                        "1.ascendant\n"+
+                        "2.descendant\n");
+            int option4;
+            try {
+                option4 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            
+            if(option4 < 1 || option4>2){
+                System.out.println("invalid option");
+                return;
+            }
+            if(option4==1){
+                msj = controller.ascendantOrderForOrders(result, option2);
+            }else if(option4==2){
+                msj = controller.descendantOrderForOrders(result, option2);
+            }
+            System.out.println(msj);
+        }else if(option==5){
+            System.out.println("Type th minimun range of totalPrice");
+            try {
+                minGoal3 = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            System.out.println("Type th maximun range of totalPrice");
+            try {
+                maxGoal3 = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            ArrayList<Order> result = controller.searchOrderByTotalPriceRange(minGoal3,maxGoal3);
+            System.out.println("Choose the element for the order of the list\n"+
+            "1.By buyer Name\n"+
+            "2.By Total price\n"+
+            "3.By date\n");
+            try {
+                option2 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            if(option2 < 1 || option2>3){
+                System.out.println("invalid option");
+                return;
+            }
+            System.out.println("In wich order you want to see th list?\n"+
+                        "1.ascendant\n"+
+                        "2.descendant\n");
+            int option4;
+            try {
+                option4 = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("The typed value must be an integer");
+                return;
+            }
+            
+            if(option4 < 1 || option4>2){
+                System.out.println("invalid option");
+                return;
+            }
+            if(option4==1){
+                msj = controller.ascendantOrderForOrders(result, option2);
+            }else if(option4==2){
+                msj = controller.descendantOrderForOrders(result, option2);
+            }
+            System.out.println(msj);
+        }
+    }
+    public void recoverDataProduts(){
+        Gson gson = new Gson();
 
+        File projectDir = new File(System.getProperty("user.dir"));
+        File dataDirectory = new File(projectDir+"/data");
+        File result = new File(projectDir+"/data/result.json");
+
+        try {
+            FileInputStream fis = new FileInputStream(result);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            String json = "";
+            while ( (line = reader.readLine()) != null){
+                json += line;
+            }
+
+            Product[] products = gson.fromJson(json, Product[].class);
+            for(int i = 0;i<products.length;i++){
+                controller.getProducts().add(products[i]);
+            }
+
+
+        }catch (FileNotFoundException e){
+
+        }catch (IOException e){
+
+        }
+    }
+    public void recoverDataOrders(){
+        Gson gson = new Gson();
+
+        File projectDir = new File(System.getProperty("user.dir"));
+        File dataDirectory = new File(projectDir+"/data");
+        File result = new File(projectDir+"/data/result2.json");
+
+        try {
+            FileInputStream fis = new FileInputStream(result);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            String json = "";
+            while ( (line = reader.readLine()) != null){
+                json += line;
+            }
+
+            Order[] orders = gson.fromJson(json, Order[].class);
+            for(int i = 0;i<orders.length;i++){
+                controller.getOrders().add(orders[i]);
+            }
+
+
+        }catch (FileNotFoundException e){
+
+        }catch (IOException e){
+
+        }
+    }
+    public void createGsonOrders(){
+        Gson gson = new Gson();
+
+        File projectDir = new File(System.getProperty("user.dir"));
+        File dataDirectory = new File(projectDir+"/data");
+        File result = new File(projectDir+"/data/result2.json");
+
+
+        if(!dataDirectory.exists()){
+            dataDirectory.mkdirs();
+            System.out.println(dataDirectory.exists());
+        }
+
+        String json2 = gson.toJson(controller.getOrders());
+
+        try {
+            FileOutputStream fos = new FileOutputStream(result);
+            fos.write(json2.getBytes(StandardCharsets.UTF_8));
+            fos.close();
+
+        }catch (FileNotFoundException e){
+            System.out.println("file not found");
+        }catch (IOException e){
+            System.out.println("IOE");
+        }
+    }
+   
+    public void createGson(){
+        Gson gson = new Gson();
+
+        File projectDir = new File(System.getProperty("user.dir"));
+        File dataDirectory = new File(projectDir+"/data");
+        File result = new File(projectDir+"/data/result.json");
+
+
+        if(!dataDirectory.exists()){
+            dataDirectory.mkdirs();
+            System.out.println(dataDirectory.exists());
+        }
+
+        String json2 = gson.toJson(controller.getProducts());
+
+        try {
+            FileOutputStream fos = new FileOutputStream(result);
+            fos.write(json2.getBytes(StandardCharsets.UTF_8));
+            fos.close();
+
+        }catch (FileNotFoundException e){
+            System.out.println("file not found");
+        }catch (IOException e){
+            System.out.println("IOE");
+        }
+    }
     public Scanner getReader() {
         return reader;
     }

@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat; 
 public class Controller {
     private ArrayList<Product> products;
     private ArrayList<Order> orders;
@@ -10,6 +12,21 @@ public class Controller {
     public Controller() {
         products = new ArrayList<>();
         orders = new ArrayList<>();
+    }
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
     public String addProduct(String name, String description, double price, int availableQuantity, int category,
@@ -44,7 +61,8 @@ public class Controller {
     public String addOrder(String buyerName, ArrayList<String> productList, ArrayList<Integer> quantityList,
             double totalPrice) {
         String msj = "order complete";
-        Order newOrder = new Order(buyerName, productList, quantityList, totalPrice);
+        Date dateOfPurchasDate = new Date();
+        Order newOrder = new Order(buyerName, productList, quantityList, totalPrice,dateOfPurchasDate);
         orders.add(newOrder);
         return msj;
 
@@ -284,6 +302,205 @@ public class Controller {
         }
         
        return result;
+    }
+    public String searchOrderByBuyerName(String buyerName){
+        ArrayList<Order> ordersClone = new ArrayList<>(orders);
+        return searchOrderByBuyerName(buyerName,ordersClone,"");
+    }
+    public String searchOrderByBuyerName(String goal,ArrayList<Order> order2,String msj){
+        order2.sort(new ComparatorBuyerName());
+        int left = 0;
+        int right = order2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(goal.compareTo(order2.get(mid).getBuyerName())<0){
+                right = mid - 1;
+            }
+            else if(goal.compareTo(order2.get(mid).getBuyerName())>0){
+                left = mid + 1;
+            } else {
+                msj += order2.get(mid).toString()+"\n";
+                order2.remove(mid);
+                return searchOrderByBuyerName(goal,order2,msj);
+            }
+        }
+        if(msj.equals("")){
+            msj = "product not found"; 
+        }
+       return msj;
+    }
+    public String searchOrderByTotalPrice(double totalPrice){
+        ArrayList<Order> ordersClone = new ArrayList<>(orders);
+        return searchOrderByTotalPrice(totalPrice,ordersClone,"");
+    }
+    public String searchOrderByTotalPrice(double totalPrice,ArrayList<Order>order2,String msj){
+        order2.sort(new ComparatorTotalPrice());
+        int left = 0;
+        int right = order2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(totalPrice<order2.get(mid).getTotalPrice()){
+                right = mid - 1;
+            }
+            else if(totalPrice>order2.get(mid).getTotalPrice()){
+                left = mid + 1;
+            } else {
+                msj += order2.get(mid).toString()+"\n";
+                order2.remove(mid);
+                return searchOrderByTotalPrice(totalPrice,order2,msj);
+            }
+        }
+        if(msj.equals("")){
+            msj = "product not found"; 
+        }
+       return msj;
+    }
+    public String searchOrderByDate(String date) throws ParseException{
+        SimpleDateFormat formatter6=new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+        ArrayList<Order> ordersClone = new ArrayList<>(orders);
+        Date goal = null;
+        try{
+            goal = formatter6.parse(date);
+        }catch(ParseException e){
+            return "wrong format";
+        }
+        
+        return searchOrderByDate(goal, ordersClone, ""); 
+    }
+    public String searchOrderByDate(Date date,ArrayList<Order> order2,String msj){
+        order2.sort(new ComparatorDate());
+        int left = 0;
+        int right = order2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(date.compareTo(order2.get(mid).getDateOfPurchase())<0){
+                right = mid - 1;
+            }
+            else if(date.compareTo(order2.get(mid).getDateOfPurchase())>0){
+                left = mid + 1;
+            } else {
+                msj += order2.get(mid).toString()+"\n";
+                order2.remove(mid);
+                return searchOrderByDate(date,order2,msj);
+            }
+        }
+        if(msj.equals("")){
+            msj = "product not found"; 
+        }
+       return msj;
+    }
+    public ArrayList<Order> searchBuyerNameRange(String minGoal,String maxGoal){
+        ArrayList<Order> ordersClone = new ArrayList<>(orders);
+        ArrayList<Order> result = new ArrayList<>();
+        return  searchBuyerNameRange(minGoal,maxGoal,ordersClone,result);
+    }
+    public ArrayList<Order> searchBuyerNameRange(String minGoal,String maxGoal,ArrayList<Order> order2,ArrayList<Order> result){
+        order2.sort(new ComparatorBuyerName());
+        int left = 0;
+        int right = order2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(minGoal.compareTo(order2.get(mid).getBuyerName())>0){
+                right = mid - 1;
+            }
+            else if(maxGoal.compareTo(order2.get(mid).getBuyerName())<0){
+                left = mid + 1;
+            } else if(minGoal.compareTo(order2.get(mid).getBuyerName())<=0 && maxGoal.compareTo(order2.get(mid).getBuyerName())>=0){
+                result.add(order2.get(mid));
+                order2.remove(mid);
+                return searchBuyerNameRange(minGoal,maxGoal,order2,result);
+            }
+        }
+       return result;
+    }
+    public ArrayList<Order> searchOrderByTotalPriceRange(double minGoal,double maxGoal){
+        ArrayList<Order> ordersClone = new ArrayList<>(orders);
+        ArrayList<Order> result = new ArrayList<>();
+        return searchOrderByTotalPriceRange(minGoal,maxGoal,ordersClone,result);
+    }
+    public ArrayList<Order> searchOrderByTotalPriceRange(double minGoal,double maxGoal,ArrayList<Order>order2,ArrayList<Order>result){
+        order2.sort(new ComparatorTotalPrice());
+        int left = 0;
+        int right = order2.size() - 1;
+
+        while(left <= right){
+
+            int mid = (right + left)/2;
+
+            if(minGoal>order2.get(mid).getTotalPrice()){
+                right = mid - 1;
+            }
+            else if(maxGoal<order2.get(mid).getTotalPrice()){
+                left = mid + 1;
+            } else if(minGoal<=order2.get(mid).getTotalPrice() && order2.get(mid).getTotalPrice()<=maxGoal){
+                result.add(order2.get(mid));
+                order2.remove(mid);
+                return searchOrderByTotalPriceRange(minGoal,maxGoal,order2,result);
+            }
+        }
+       return result;
+    }
+    public String ascendantOrderForOrders(ArrayList<Order> result,int option){
+        String msj = ""; 
+        switch(option){
+            case 1:
+                result.sort(new ComparatorBuyerName());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            case 2:
+                result.sort(new ComparatorTotalPrice());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            case 3:
+                result.sort(new ComparatorDate());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            default:
+                    return "Invalid option";
+        }
+    }
+    public String descendantOrderForOrders(ArrayList<Order> result,int option){
+        String msj = ""; 
+        switch(option){
+            case 1:
+                result.sort(new ComparatorBuyerName());
+                for(int i = 0;i<result.size();i++){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            case 2:
+                result.sort(new ComparatorTotalPrice());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            case 3:
+                result.sort(new ComparatorDate());
+                for(int i = result.size()-1;i>=0;i--){
+                    msj += result.get(i).toString()+"\n";
+                }
+                return msj;
+            default:
+                    return "Invalid option";
+        }
     }
     public String ascendantOrder(ArrayList<Product> result,int option){
         String msj = ""; 
