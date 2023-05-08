@@ -43,7 +43,7 @@ public class Controller {
 
     public String addOrder(String buyerName, ArrayList<String> productList, ArrayList<Integer> quantityList,
             double totalPrice) {
-        String msj = "";
+        String msj = "order complete";
         Order newOrder = new Order(buyerName, productList, quantityList, totalPrice);
         orders.add(newOrder);
         return msj;
@@ -77,7 +77,11 @@ public class Controller {
 
     public int searchProductQuantity(String name) {
         int position = searchProductPosition(name);
-        return products.get(position).getAvailableQuantity();
+        if(position ==-1){
+            return position;
+        }else {
+            return products.get(position).getAvailableQuantity();
+        }
     }
     public String searchByProductPrice(double goal){
         ArrayList<Product> productsClone = new ArrayList<>(products);
