@@ -520,7 +520,6 @@ public class Main {
                 msj = controller.descendantOrder(result, option2);
             }
             System.out.println(msj);
-        
         }
     }
 

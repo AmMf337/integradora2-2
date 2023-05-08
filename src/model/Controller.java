@@ -317,6 +317,7 @@ public class Controller {
                     return "Invalid option";
         }
     }
+
     public String descendantOrder(ArrayList<Product> result,int option){
         String msj = ""; 
         switch(option){
